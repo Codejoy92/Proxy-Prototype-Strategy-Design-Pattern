@@ -12,8 +12,8 @@ import java.io.FileWriter;
 public class FileProcessor {
 	FileReader fileReader = null;
 	BufferedReader bufferedReader = null;
-	BufferedWriter bw = null;;
-	FileWriter fw = null;
+	BufferedWriter bufferedWriter = null;;
+	FileWriter fileWriter = null;
 
 	public void openFile(String FileName) {
 		try {
