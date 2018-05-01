@@ -2,11 +2,11 @@ package genericCheckpointing.xmlStoreRestore;
 
 import genericCheckpointing.util.SerializableObject;
 import java.lang.reflect.Method;
-import genericCheckpointing.server.Strategy;
+import genericCheckpointing.server.SerStrategy;
 import java.lang.reflect.InvocationHandler;
-import genericCheckpointing.util.DeserialisingXML;
+import genericCheckpointing.util.XMLDeserialization;
 import genericCheckpointing.util.FileProcessor;
-import genericCheckpointing.util.SerialisingXML;
+import genericCheckpointing.util.XMLSerialization;
 
 public class StoreRestoreHandler implements InvocationHandler {
 
@@ -17,20 +17,20 @@ public class StoreRestoreHandler implements InvocationHandler {
 
 		SerializableObject obj = new SerializableObject();
 		if (method.getName().equals("readObj")) {
-			obj = dataDeSerialization(new DeserialisingXML(fileProcessor));
+			obj = deSerializeData(new XMLDeserialization(fileProcessor));
 		}else if (method.getName().equals("writeObj")) {
-			dataSerialization((SerializableObject) args[0], new SerialisingXML(fileProcessor));
+			serializeData((SerializableObject) args[0], new XMLSerialization(fileProcessor));
 		}else {
 			obj = null;
 		}
 		return obj;
 	}
 
-	private SerializableObject dataDeSerialization(Strategy strategy) {
+	private SerializableObject deSerializeData(SerStrategy strategy) {
 		return strategy.processFile();
 	}
 
-	private void dataSerialization(SerializableObject sObject, Strategy strategy) {
+	private void serializeData(SerializableObject sObject, SerStrategy strategy) {
 		strategy.processInput(sObject);
 	}
 
