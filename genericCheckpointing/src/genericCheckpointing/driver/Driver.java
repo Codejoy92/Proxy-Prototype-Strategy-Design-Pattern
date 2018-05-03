@@ -30,8 +30,8 @@ public class Driver {
 		StoreRestoreI srObject = (StoreRestoreI) proxy.createProxy(new Class[] { StoreI.class, RestoreI.class },
 				handler);
 		
-		MyAllTypesFirst myFirst;
-		MyAllTypesSecond mySecond;
+		MyAllTypesFirst myFirst = null;
+		MyAllTypesSecond mySecond = null;
 		String mode = args[0];
 		String filename = args[2];
 		processor.openFile(filename);
@@ -58,10 +58,7 @@ public class Driver {
 				String myString = "Design patterns " + i;
 				boolean myBool = Math.random() < 0.5;
 
-				if (value < 10) {
-					myFirst = new MyAllTypesFirst(myString, myBool);
-				}
-				else {
+				if (value > 10) {
 					myFirst = new MyAllTypesFirst(myInt, myOtherInt, myLong, myOtherLong, myString, myBool);
 				}
 				double val = rand.nextDouble();
@@ -71,11 +68,8 @@ public class Driver {
 				short myShort = (short) rand.nextInt(20);
 				char myChar = (char) (rand.nextInt(26) + 'z');
 
-				if (val < 10) {
-					mySecond = new MyAllTypesSecond(myFloat, myShort, myChar);
-				}
-				else {
-					mySecond = new MyAllTypesSecond(myDouble, myOtherDouble, myFloat, myShort, myChar);
+				if (val > 10) {
+					mySecond = new MyAllTypesSecond(myDouble, myOtherDouble, myFloat, myShort,myShort, myChar);
 				}
 				SerobjList.add(myFirst);
 				SerobjList.add(mySecond);
