@@ -9,13 +9,13 @@ import genericCheckpointing.xmlStoreRestore.StoreRestoreHandler;
 
 public class ProxyCreator {
 
-	public StoreRestoreI createProxy(Class<?>[] interfaceArray, StoreRestoreHandler  handler) {
+	public StoreRestoreI createProxy(Class<?>[] interfaceArray, InvocationHandler handler) {
 		StoreRestoreI  serDeserObj  =
 	            (StoreRestoreI)
 	            Proxy.newProxyInstance(
 	                                   getClass().getClassLoader(),
 	                                   interfaceArray,
-	                                   (InvocationHandler) handler
+	                                   handler
 	                                   );
 		return serDeserObj ;
 	}

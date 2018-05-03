@@ -35,8 +35,9 @@ public class Driver {
 		String mode = args[0];
 		String filename = args[2];
 		processor.openFile(filename);
+		//noOfObjects:number of objects to be deserialized..
 		int noOfObjects = Integer.parseInt(args[1]);
-		
+		//The mode could be "serdeser" or "deser"
 		// processing serialization and deserialization
 		if (mode.equals("deser")) {
 			XMLDeserialization deserialisingXML = new XMLDeserialization(processor);
@@ -48,8 +49,9 @@ public class Driver {
 		} else if (mode.equals("serdeser")) {
 			processor.openFile(filename);
 			handler.setFileprocessor(processor);
-
+			
 			for (int i = 0; i < noOfObjects; i++) {
+				//random value generation logic
 				int value = rand.nextInt(20);
 				int myInt = value;
 				int myOtherInt = value;
