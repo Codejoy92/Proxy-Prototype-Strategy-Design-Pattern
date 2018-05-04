@@ -41,11 +41,11 @@ public class FileProcessor {
 		
 	}
 
-	public void writeToFile(String FileName) {
+	public void writeToFile(String str) {
 		try {
-			 bufferedWriter = new BufferedWriter(new FileWriter(FileName));
+			 bufferedWriter.write(str);
 		} catch (IOException e) {
-			System.out.println("File not found at location: " + FileName);
+			e.printStackTrace();
 			System.exit(1);
 		}
 		
@@ -60,6 +60,19 @@ public class FileProcessor {
 			System.exit(1);
 		}
 		return line;
+	}
+
+	public void openFileToWrite(String filename) {
+
+		try {
+			 bufferedWriter = new BufferedWriter(new FileWriter(filename));
+		} catch (IOException e) {
+			System.out.println("File not found at location: " + filename);
+			System.exit(1);
+		}
+		
+	
+		
 	}
 
 }

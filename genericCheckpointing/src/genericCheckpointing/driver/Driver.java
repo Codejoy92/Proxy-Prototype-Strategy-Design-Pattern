@@ -44,7 +44,7 @@ public class Driver {
 			handler.setFileprocessor(processor);
 			((RestoreI) srObject).readObj("XML");
 		} else if (mode.equals("serdeser")) {
-			processor.openFile(filename);
+			processor.openFileToWrite(filename);
 			handler.setFileprocessor(processor);
 
 			for (int i = 0; i < noOfObjects; i++) {
@@ -54,11 +54,13 @@ public class Driver {
 				int myOtherInt = value;
 				long myLong = (long) value;
 				long myOtherLong = (long) value;
-				String myString = "Design patterns " + i;
+				String myString = "Design patterns" + i;
 				boolean myBool = Math.random() < 0.5;
 
 				if (value > 10) {
 					myFirst = new MyAllTypesFirst(myInt, myOtherInt, myLong, myOtherLong, myString, myBool);
+					SerobjList.add(myFirst);
+					((StoreI) srObject).writeObj(myFirst, 1, "XML");
 				}
 				double val = rand.nextDouble();
 				double myDouble = val;
@@ -69,15 +71,10 @@ public class Driver {
 
 				if (val > 10) {
 					mySecond = new MyAllTypesSecond(myDouble, myOtherDouble, myFloat, myShort, myShort, myChar);
+					SerobjList.add(mySecond);
+					((StoreI) srObject).writeObj(mySecond, 2, "XML");
 				}
-				SerobjList.add(myFirst);
-				SerobjList.add(mySecond);
-
-				((StoreI) srObject).writeObj(myFirst, 1, "XML");
-				((StoreI) srObject).writeObj(mySecond, 2, "XML");
-
 			}
-
 		} else {
 			System.out.println("No such mode");
 			processor.closeFile();
