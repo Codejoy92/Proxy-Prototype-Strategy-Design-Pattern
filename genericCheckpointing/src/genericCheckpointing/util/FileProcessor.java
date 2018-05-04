@@ -15,13 +15,10 @@ public class FileProcessor {
 	BufferedWriter bufferedWriter;
 	FileWriter fileWriter;
 
+	
 	public void openFile(String FileName) {
 		try {
-			fileReader = new FileReader(FileName);
-			bufferedReader = new BufferedReader(fileReader);
-			
-			fileWriter = new FileWriter(FileName);
-			bufferedWriter = new BufferedWriter(fileWriter);
+			 bufferedReader = new BufferedReader(new FileReader(FileName));	
 		} catch (IOException e) {
 			System.out.println("File not found at location: " + FileName);
 			System.exit(1);
@@ -29,12 +26,24 @@ public class FileProcessor {
 	}
 	
 	public void closeFile() {
-		// TODO Auto-generated method stub
+		try{
+		    this.bufferedReader.close();
+		    this.fileReader.close();	    
+		    this.bufferedWriter.close();
+		    this.fileWriter.close();
+		}catch(IOException e){
+		    e.printStackTrace();
+		}
 		
 	}
 
-	public void writeToFile(String string) {
-		// TODO Auto-generated method stub
+	public void writeToFile(String FileName) {
+		try {
+			 bufferedWriter = new BufferedWriter(new FileWriter(FileName));
+		} catch (IOException e) {
+			System.out.println("File not found at location: " + FileName);
+			System.exit(1);
+		}
 		
 	}
 

@@ -25,33 +25,30 @@ public class Driver {
 		FileProcessor processor = new FileProcessor();
 		StoreRestoreHandler handler = new StoreRestoreHandler();
 		List<SerializableObject> SerobjList = new ArrayList<SerializableObject>();
-		
+
 		util.validateFile(args);
 		StoreRestoreI srObject = (StoreRestoreI) proxy.createProxy(new Class[] { StoreI.class, RestoreI.class },
 				handler);
-		
+
 		MyAllTypesFirst myFirst = null;
 		MyAllTypesSecond mySecond = null;
 		String mode = args[0];
 		String filename = args[2];
 		processor.openFile(filename);
-		//noOfObjects:number of objects to be deserialized..
 		int noOfObjects = Integer.parseInt(args[1]);
-		//The mode could be "serdeser" or "deser"
+		// noOfObjects:number of objects to be deserialized..
+		// The mode could be "serdeser" or "deser"
 		// processing serialization and deserialization
 		if (mode.equals("deser")) {
-			XMLDeserialization deserialisingXML = new XMLDeserialization(processor);
-			for (int i = 0; i < noOfObjects; i++)
-				SerobjList.add(deserialisingXML.processFile());
-			for (SerializableObject obj : SerobjList)
-				System.out.println(obj);
-
+			SerializableObject deserObj;
+			handler.setFileprocessor(processor);
+			((RestoreI) srObject).readObj("XML");
 		} else if (mode.equals("serdeser")) {
 			processor.openFile(filename);
 			handler.setFileprocessor(processor);
-			
+
 			for (int i = 0; i < noOfObjects; i++) {
-				//random value generation logic
+				// random value generation logic
 				int value = rand.nextInt(20);
 				int myInt = value;
 				int myOtherInt = value;
@@ -71,13 +68,13 @@ public class Driver {
 				char myChar = (char) (rand.nextInt(26) + 'z');
 
 				if (val > 10) {
-					mySecond = new MyAllTypesSecond(myDouble, myOtherDouble, myFloat, myShort,myShort, myChar);
+					mySecond = new MyAllTypesSecond(myDouble, myOtherDouble, myFloat, myShort, myShort, myChar);
 				}
 				SerobjList.add(myFirst);
 				SerobjList.add(mySecond);
 
-				((StoreI) srObject).writeObj(myFirst,1, "XML");
-				((StoreI) srObject).writeObj(mySecond,2, "XML");
+				((StoreI) srObject).writeObj(myFirst, 1, "XML");
+				((StoreI) srObject).writeObj(mySecond, 2, "XML");
 
 			}
 
