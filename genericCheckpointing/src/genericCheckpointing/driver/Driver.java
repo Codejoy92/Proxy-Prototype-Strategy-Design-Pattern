@@ -24,14 +24,13 @@ public class Driver {
 		ProxyCreator proxy = new ProxyCreator();
 		FileProcessor processor = new FileProcessor();
 		StoreRestoreHandler handler = new StoreRestoreHandler();
-		List<SerializableObject> SerobjList = new ArrayList<SerializableObject>();
+		List<SerializableObject> serobjList = new ArrayList<SerializableObject>();
+		List<SerializableObject> serReadObj = new ArrayList<SerializableObject>();
 
 		util.validateFile(args);
 		StoreRestoreI srObject = (StoreRestoreI) proxy.createProxy(new Class[] { StoreI.class, RestoreI.class },
 				handler);
 
-		MyAllTypesFirst myFirst = null;
-		MyAllTypesSecond mySecond = null;
 		String mode = args[0];
 		String filename = args[2];
 		processor.openFile(filename);
@@ -43,50 +42,35 @@ public class Driver {
 			handler.setFileprocessor(processor);
 			((RestoreI) srObject).readObj("XML");
 		} else if (mode.equals("serdeser")) {
+			// serialization starts
 			processor.openFileToWrite(filename);
 			handler.setFileprocessor(processor);
-
-			for (int i = 0; i < noOfObjects; i++) {
-				// random value generation logic
-				int value = rand.nextInt(20);
-				int myInt = value;
-				int myOtherInt = value;
-				long myLong = (long) value;
-				long myOtherLong = (long) value;
-				String myString = "Design patterns" + i;
-				boolean myBool = Math.random() < 0.5;
-
-				myFirst = new MyAllTypesFirst(myInt, myOtherInt, myLong, myOtherLong, myString, myBool);
-				if (value >= 10) {
-					((StoreI) srObject).writeObj(myFirst, 1, "XML");
-				}
-				SerobjList.add(myFirst);
-				
-				double val = 20 * rand.nextDouble();
-				double myDouble = val;
-				double myOtherDouble = val;
-				float myFloat = rand.nextFloat();
-				short myShort = (short) rand.nextInt(20);
-				char myChar = (char) (rand.nextInt(26) + 'z');
-				
-				mySecond = new MyAllTypesSecond(myDouble, myOtherDouble, myFloat, myShort, myShort, myChar);
-				if (val >= 10) {
-					((StoreI) srObject).writeObj(mySecond, 2, "XML");
-				}
-				SerobjList.add(mySecond);
-			}
+			randomValueGenerator(rand, serobjList, srObject, noOfObjects);
 			processor.closeFile();
-			//serialization completed
-			//Deserialzaton starts
+			// serialization ends
+			
+			// Deserialzaton starts
 			processor.openFile(filename);
 			handler.setFileprocessor(processor);
-			System.out.println("Total objects whose values are more than 10");
+			System.out.println("Before Serialization");
 			((RestoreI) srObject).readObj("XML");
-			
-			System.out.println("Total objects Created");
-			for(SerializableObject obj : SerobjList) {
+			processor.closeFile();
+
+			serReadObj.addAll(processor.getSerReadObj());
+			// Print all objects created
+			System.out.println("After Serialization");
+			for (SerializableObject obj : serobjList) {
 				System.out.println(obj);
 			}
+
+			// counting mismatch
+			int mismatchCount = 0;
+			for (int j = 0; j < serobjList.size(); j++) {
+				if (!serobjList.get(j).equals(serReadObj.get(j))) {
+					mismatchCount++;
+				}
+			}
+			System.out.println("Mismatch Count is: " + mismatchCount);
 		} else {
 			System.out.println("No such mode");
 			processor.closeFile();
@@ -94,6 +78,38 @@ public class Driver {
 		}
 		processor.closeFile();
 
+	}
+
+	private static void randomValueGenerator(Random rand, List<SerializableObject> serobjList, StoreRestoreI srObject,
+			int noOfObjects) {
+		MyAllTypesFirst myFirst;
+		MyAllTypesSecond mySecond;
+		char myChar = 'A';
+		for (int i = 0; i < noOfObjects; i++) {
+			// random value generation logic
+			int value = rand.nextInt(20)+1;
+			int myInt = value;
+			int myOtherInt = value;
+			long myLong = (long) value;
+			long myOtherLong = (long) value;
+			String myString = "Design patterns" + i;
+			boolean myBool = Math.random() < 0.5;
+
+			myFirst = new MyAllTypesFirst(myInt, myOtherInt, myLong, myOtherLong, myString, myBool);
+			((StoreI) srObject).writeObj(myFirst, 1, "XML");
+			serobjList.add(myFirst);
+
+			double val = 20 * rand.nextDouble();
+			double myDouble = val;
+			double myOtherDouble = val;
+			float myFloat =(float) val;
+			short myShort = (short) val;
+			myChar += 1;
+
+			mySecond = new MyAllTypesSecond(myDouble, myOtherDouble, myFloat, myShort, myShort, myChar);
+			((StoreI) srObject).writeObj(mySecond, 2, "XML");
+			serobjList.add(mySecond);
+		}
 	}
 
 }

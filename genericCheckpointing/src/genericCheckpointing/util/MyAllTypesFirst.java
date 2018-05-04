@@ -64,13 +64,13 @@ public class MyAllTypesFirst extends SerializableObject{
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
 		int result = 1;
-		result = prime * result + (myBool ? 1231 : 1237);
-		result = prime * result + myInt;
-		result = prime * result + (int) (myLong ^ (myLong >>> 32));
-		result = prime * result + myOtherInt;
-		result = prime * result + (int) (myOtherLong ^ (myOtherLong >>> 32));
+		result += myInt;
+		result += myOtherInt;
+		result += Long.hashCode(myLong); 
+		result += Long.hashCode(myOtherLong);
+		result += myString.hashCode();
+		result += Boolean.hashCode(myBool);
 		return result;
 	}
 

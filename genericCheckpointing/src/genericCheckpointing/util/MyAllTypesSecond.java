@@ -72,17 +72,13 @@ public class MyAllTypesSecond extends SerializableObject {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
 		int result = 1;
-		result = prime * result + myChar;
-		long temp;
-		temp = Double.doubleToLongBits(myDouble);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + Float.floatToIntBits(myFloat);
-		temp = Double.doubleToLongBits(myOtherDouble);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + myOtherShort;
-		result = prime * result + myShort;
+		result += Double.hashCode(myDouble);
+		result += Double.hashCode(myOtherDouble);
+		result += Float.hashCode(myFloat); 
+		result += myShort;
+		result += myOtherShort;
+		result += Character.hashCode(myChar);
 		return result;
 	}
 

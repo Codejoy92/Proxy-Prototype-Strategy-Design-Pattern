@@ -2,15 +2,21 @@ package genericCheckpointing.util;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
+import genericCheckpointing.driver.Driver;
 import genericCheckpointing.server.SerStrategy;
 
 public class XMLDeserialization implements SerStrategy {
 	FileProcessor fileProcessor;
 	DeserializeTypes deser;
-
+	List<SerializableObject> serReadObj = new ArrayList<SerializableObject>();
 	public XMLDeserialization(FileProcessor fileProcessorIn) {
 		fileProcessor = fileProcessorIn;
+	}
+
+	public XMLDeserialization() {
 	}
 
 	@Override
@@ -33,6 +39,7 @@ public class XMLDeserialization implements SerStrategy {
 						// java reflection is used to invoke method objects
 						if (line.trim().equals("</complexType>")) {
 							System.out.println(object);
+							serReadObj.add(object);
 						} else if (line.contains("myString")) {
 							String value = deser.parseLine(line);
 							Class[] paramString = new Class[1];
@@ -96,7 +103,14 @@ public class XMLDeserialization implements SerStrategy {
 							paramShort[0] = Short.TYPE;
 							Method method = className.getDeclaredMethod("setmyShort", paramShort);
 							method.invoke(object, value);
-						}else if (line.contains("myChar")) {
+						}else if (line.contains("myOtherShort")) {
+							short value = deser.parseShortType(line);
+							Class[] paramShort = new Class[1];
+							paramShort[0] = Short.TYPE;
+							Method method = className.getDeclaredMethod("setmyOtherShort", paramShort);
+							method.invoke(object, value);
+						}
+						else if (line.contains("myChar")) {
 							String value = deser.parseLine(line);
 							Class[] paramChar = new Class[1];
 							paramChar[0] = char.class;
@@ -111,7 +125,12 @@ public class XMLDeserialization implements SerStrategy {
 					}
 					line = fileProcessor.readLine();
 				} 
+				fileProcessor.serReadObj.addAll(serReadObj);
 		return object;
 	}
 
+	public List<SerializableObject> getSerReadObj() {
+		return serReadObj;
+	}
+	
 }

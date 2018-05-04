@@ -1,7 +1,8 @@
 package genericCheckpointing.util;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.io.FileNotFoundException;
 
 import java.io.BufferedReader;
@@ -14,8 +15,16 @@ public class FileProcessor {
 	BufferedReader bufferedReader;
 	BufferedWriter bufferedWriter;
 	FileWriter fileWriter;
-
+	List<SerializableObject> serReadObj = new ArrayList<SerializableObject>();
 	
+	public List<SerializableObject> getSerReadObj() {
+		return serReadObj;
+	}
+
+	public void setSerReadObj(List<SerializableObject> serReadObj) {
+		this.serReadObj = serReadObj;
+	}
+
 	public void openFile(String FileName) {
 		try {
 			 bufferedReader = new BufferedReader(new FileReader(FileName));	

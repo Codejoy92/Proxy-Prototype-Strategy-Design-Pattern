@@ -67,8 +67,10 @@ public class XMLSerialization implements SerStrategy{
 				} else if (short.class == field.getType()) {
 					Method getterMethod = cls.getMethod("get" + field.getName());
 					Object invokeRet = getterMethod.invoke(obj);
+					if (Short.parseShort(invokeRet.toString()) >= 10) {
 					builder.append(ser.getDataTypeTag(field.getName(), "short", invokeRet.toString()));
 					builder.append(System.getProperty("line.separator"));
+					}
 				}
 			} catch (IllegalArgumentException |NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e) {
 				// TODO Auto-generated catch block
