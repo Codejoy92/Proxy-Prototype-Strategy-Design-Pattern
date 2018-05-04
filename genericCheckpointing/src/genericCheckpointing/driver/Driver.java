@@ -40,7 +40,6 @@ public class Driver {
 		// The mode could be "serdeser" or "deser"
 		// processing serialization and deserialization
 		if (mode.equals("deser")) {
-			SerializableObject deserObj;
 			handler.setFileprocessor(processor);
 			((RestoreI) srObject).readObj("XML");
 		} else if (mode.equals("serdeser")) {
@@ -57,23 +56,36 @@ public class Driver {
 				String myString = "Design patterns" + i;
 				boolean myBool = Math.random() < 0.5;
 
-				if (value > 10) {
-					myFirst = new MyAllTypesFirst(myInt, myOtherInt, myLong, myOtherLong, myString, myBool);
-					SerobjList.add(myFirst);
+				myFirst = new MyAllTypesFirst(myInt, myOtherInt, myLong, myOtherLong, myString, myBool);
+				if (value >= 10) {
 					((StoreI) srObject).writeObj(myFirst, 1, "XML");
 				}
-				double val = rand.nextDouble();
+				SerobjList.add(myFirst);
+				
+				double val = 20 * rand.nextDouble();
 				double myDouble = val;
 				double myOtherDouble = val;
 				float myFloat = rand.nextFloat();
 				short myShort = (short) rand.nextInt(20);
 				char myChar = (char) (rand.nextInt(26) + 'z');
-
-				if (val > 10) {
-					mySecond = new MyAllTypesSecond(myDouble, myOtherDouble, myFloat, myShort, myShort, myChar);
-					SerobjList.add(mySecond);
+				
+				mySecond = new MyAllTypesSecond(myDouble, myOtherDouble, myFloat, myShort, myShort, myChar);
+				if (val >= 10) {
 					((StoreI) srObject).writeObj(mySecond, 2, "XML");
 				}
+				SerobjList.add(mySecond);
+			}
+			processor.closeFile();
+			//serialization completed
+			//Deserialzaton starts
+			processor.openFile(filename);
+			handler.setFileprocessor(processor);
+			System.out.println("Total objects whose values are more than 10");
+			((RestoreI) srObject).readObj("XML");
+			
+			System.out.println("Total objects Created");
+			for(SerializableObject obj : SerobjList) {
+				System.out.println(obj);
 			}
 		} else {
 			System.out.println("No such mode");

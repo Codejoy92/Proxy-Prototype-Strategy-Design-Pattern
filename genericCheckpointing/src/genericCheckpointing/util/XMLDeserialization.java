@@ -37,13 +37,13 @@ public class XMLDeserialization implements SerStrategy {
 							String value = deser.parseLine(line);
 							Class[] paramString = new Class[1];
 							paramString[0] = String.class;
-							Method method = className.getDeclaredMethod("setMyString", paramString);
+							Method method = className.getDeclaredMethod("setmyString", paramString);
 							method.invoke(object, value);
 						} else if (line.contains("myBool")) {
 							boolean value = deser.parseBoolType(line);
 							Class[] paramBool = new Class[1];
 							paramBool[0] = Boolean.TYPE;
-							Method method = className.getDeclaredMethod("setMyBool", paramBool);
+							Method method = className.getDeclaredMethod("setmyBool", paramBool);
 							method.invoke(object, value);
 						} else if (line.contains("complexType") && !line.trim().equals("</complexType>")) {
 							className = Class.forName(deser.parseComplexTag(line));
@@ -52,55 +52,55 @@ public class XMLDeserialization implements SerStrategy {
 							int intValue = deser.parseIntType(line);
 							Class[] paramInt = new Class[1];
 							paramInt[0] = Integer.TYPE;
-							Method method = className.getDeclaredMethod("setMyInt", paramInt);
+							Method method = className.getDeclaredMethod("setmyInt", paramInt);
 							method.invoke(object, intValue);
 						} else if (line.contains("myOtherInt")) {
 							int intValue = deser.parseIntType(line);
 							Class[] paramInt = new Class[1];
 							paramInt[0] = Integer.TYPE;
-							Method method = className.getDeclaredMethod("setMyOtherInt", paramInt);
+							Method method = className.getDeclaredMethod("setmyOtherInt", paramInt);
 							method.invoke(object, intValue);
 						} else if (line.contains("myLong")) {
 							long value = deser.parseMyLong(line);
 							Class[] paramLong = new Class[1];
 							paramLong[0] = Long.TYPE;
-							Method method = className.getDeclaredMethod("setMyLong", paramLong);
+							Method method = className.getDeclaredMethod("setmyLong", paramLong);
 							method.invoke(object, value);
 						} else if (line.contains("myOtherLong")) {
 							long value = deser.parseMyLong(line);
 							Class[] paramLong = new Class[1];
 							paramLong[0] = Long.TYPE;
-							Method method = className.getDeclaredMethod("setMyOtherLong", paramLong);
+							Method method = className.getDeclaredMethod("setmyOtherLong", paramLong);
 							method.invoke(object, value);
 						} else if (line.contains("myDouble")) {
 							double value = deser.parseDoubleType(line);
 							Class[] paramDouble = new Class[1];
 							paramDouble[0] = Double.TYPE;
-							Method method = className.getDeclaredMethod("setMyDouble", paramDouble);
+							Method method = className.getDeclaredMethod("setmyDouble", paramDouble);
 							method.invoke(object, value);
 						} else if (line.contains("myOtherDouble")) {
 							double value = deser.parseDoubleType(line);
 							Class[] paramDouble = new Class[1];
 							paramDouble[0] = Double.TYPE;
-							Method method = className.getDeclaredMethod("setMyOtherDouble", paramDouble);
+							Method method = className.getDeclaredMethod("setmyOtherDouble", paramDouble);
 							method.invoke(object, value);
 						} else if (line.contains("myFloat")) {
 							float value = deser.parseFloatType(line);
 							Class[] paramFloat = new Class[1];
 							paramFloat[0] = Float.TYPE;
-							Method method = className.getDeclaredMethod("setMyFloat", paramFloat);
+							Method method = className.getDeclaredMethod("setmyFloat", paramFloat);
 							method.invoke(object, value);
 						}else if (line.contains("myShort")) {
 							short value = deser.parseShortType(line);
 							Class[] paramShort = new Class[1];
 							paramShort[0] = Short.TYPE;
-							Method method = className.getDeclaredMethod("setMyShort", paramShort);
+							Method method = className.getDeclaredMethod("setmyShort", paramShort);
 							method.invoke(object, value);
 						}else if (line.contains("myChar")) {
 							String value = deser.parseLine(line);
 							Class[] paramChar = new Class[1];
 							paramChar[0] = char.class;
-							Method method = className.getDeclaredMethod("setMyChar", paramChar);
+							Method method = className.getDeclaredMethod("setmyChar", paramChar);
 							method.invoke(object, value.charAt(0));
 						}
 					} catch (NoSuchMethodException | IllegalAccessException | SecurityException
