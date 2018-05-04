@@ -21,13 +21,10 @@ public class XMLDeserialization implements SerStrategy {
 	public SerializableObject processFile() {
 		deser = new DeserializeTypes();
 		SerializableObject object = null;
-		String line = "";
-		while (line != null) {
-			line = fileProcessor.readLine();
-			if (line != null && line.trim().equals("<DPSerialization>")) {
-				Class<?> className = null;
-				line = fileProcessor.readLine();
-				do {
+		String line;
+		line = fileProcessor.readLine();
+		Class<?> className = null;
+				while (line != null){
 					try {
 						// Used reflection to create the object depending on the value in the
 						// complexType element.
@@ -113,11 +110,7 @@ public class XMLDeserialization implements SerStrategy {
 						e.printStackTrace();
 					}
 					line = fileProcessor.readLine();
-				} while (line != null);
-			}
-			break;
-		}
-
+				} 
 		return object;
 	}
 

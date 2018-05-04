@@ -27,9 +27,13 @@ public class FileProcessor {
 	
 	public void closeFile() {
 		try{
+			if(null!= bufferedReader)
 		    this.bufferedReader.close();
-		    this.fileReader.close();	    
+			if(null!= fileReader)
+		    this.fileReader.close();
+			if(null!= bufferedWriter)
 		    this.bufferedWriter.close();
+			if(null!= fileWriter)
 		    this.fileWriter.close();
 		}catch(IOException e){
 		    e.printStackTrace();
