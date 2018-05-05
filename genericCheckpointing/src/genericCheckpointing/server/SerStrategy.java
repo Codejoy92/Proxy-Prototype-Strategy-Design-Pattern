@@ -4,5 +4,5 @@ import genericCheckpointing.util.SerializableObject;
 
 public interface SerStrategy {
 	 void processInput(SerializableObject obj);
-	SerializableObject processFile();
+	SerializableObject processInputDeser();
 }

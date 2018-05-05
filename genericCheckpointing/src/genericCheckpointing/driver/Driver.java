@@ -13,7 +13,6 @@ import genericCheckpointing.util.MyAllTypesSecond;
 import genericCheckpointing.util.ProxyCreator;
 import genericCheckpointing.util.SerializableObject;
 import genericCheckpointing.util.Utility;
-import genericCheckpointing.util.XMLDeserialization;
 import genericCheckpointing.xmlStoreRestore.StoreRestoreHandler;
 
 public class Driver {
@@ -35,7 +34,6 @@ public class Driver {
 		String filename = args[2];
 		processor.openFile(filename);
 		int noOfObjects = Integer.parseInt(args[1]);
-		// noOfObjects:number of objects to be deserialized..
 		// The mode could be "serdeser" or "deser"
 		// processing serialization and deserialization
 		if (mode.equals("deser")) {
@@ -52,13 +50,14 @@ public class Driver {
 			// Deserialzaton starts
 			processor.openFile(filename);
 			handler.setFileprocessor(processor);
-			System.out.println("Before Serialization");
+			System.out.println("random generated objects");
 			((RestoreI) srObject).readObj("XML");
 			processor.closeFile();
+			// Deserialzaton ends
 
-			serReadObj.addAll(processor.getSerReadObj());
 			// Print all objects created
-			System.out.println("After Serialization");
+			serReadObj.addAll(processor.getSerReadObj());
+			System.out.println("Objects after deserialization");
 			for (SerializableObject obj : serobjList) {
 				System.out.println(obj);
 			}
@@ -85,6 +84,7 @@ public class Driver {
 		MyAllTypesFirst myFirst;
 		MyAllTypesSecond mySecond;
 		char myChar = 'A';
+		// noOfObjects:number of objects to be deserialized
 		for (int i = 0; i < noOfObjects; i++) {
 			// random value generation logic
 			int value = rand.nextInt(20)+1;

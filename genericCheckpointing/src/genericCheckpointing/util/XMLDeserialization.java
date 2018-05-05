@@ -5,26 +5,41 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import genericCheckpointing.driver.Driver;
 import genericCheckpointing.server.SerStrategy;
 
 public class XMLDeserialization implements SerStrategy {
 	FileProcessor fileProcessor;
 	DeserializeTypes deser;
 	List<SerializableObject> serReadObj = new ArrayList<SerializableObject>();
+	/**
+	 *This is a paramterized constructor which takes in FileProcessor object 
+	 *its used for reading the content of file line by line
+	 *@param fileProcessorIn
+	 *
+	 */
 	public XMLDeserialization(FileProcessor fileProcessorIn) {
 		fileProcessor = fileProcessorIn;
 	}
-
+	/**
+	 *This is a default constructor 
+	 */
 	public XMLDeserialization() {
 	}
-
+	/**
+	 *This method is declared in serStrategy which is used during serialization
+	 *@param obj
+	 */
 	@Override
 	public void processInput(SerializableObject obj) {
 	}
 
+	/**
+	 *This method is declared in serStrategy which is used during Deserialization
+	 *this method parses the given xml format and creates object out of it using reflection
+	 *@return object
+	 */
 	@Override
-	public SerializableObject processFile() {
+	public SerializableObject processInputDeser() {
 		deser = new DeserializeTypes();
 		SerializableObject object = null;
 		String line;
@@ -120,7 +135,6 @@ public class XMLDeserialization implements SerStrategy {
 					} catch (NoSuchMethodException | IllegalAccessException | SecurityException
 							| IllegalArgumentException | ClassNotFoundException | InvocationTargetException
 							| InstantiationException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					line = fileProcessor.readLine();
@@ -128,7 +142,11 @@ public class XMLDeserialization implements SerStrategy {
 				fileProcessor.serReadObj.addAll(serReadObj);
 		return object;
 	}
-
+	/**
+	 * This method gets the list and returns it
+	 * @return serReadObj
+	 * 
+	 */
 	public List<SerializableObject> getSerReadObj() {
 		return serReadObj;
 	}

@@ -27,7 +27,7 @@ public class StoreRestoreHandler implements InvocationHandler {
 	}
 
 	private SerializableObject deSerializeData(SerStrategy strategy) {
-		return strategy.processFile();
+		return strategy.processInputDeser();
 	}
 
 	private void serializeData(SerializableObject sObject, SerStrategy strategy) {

@@ -6,12 +6,24 @@ import java.lang.reflect.Method;
 
 import genericCheckpointing.server.SerStrategy;
 
-public class XMLSerialization implements SerStrategy{
+public class XMLSerialization implements SerStrategy {
 	FileProcessor fileProcessor;
 	SerializeTypes ser;
+	/**
+	 *This is a paramterized constructor which takes in FileProcessor object 
+	 *its used for reading the content of file line by line
+	 *@param fileProcessorIn
+	 *
+	 */
 	public XMLSerialization(FileProcessor fileProcessorIn) {
 		fileProcessor = fileProcessorIn;
 	}
+	/**
+	 *This method is declared in serStrategy which is used during serialization
+	 *This method takes the random generated values and class descriptions
+	 *and creates xml file out of it
+	 *
+	 */
 	@Override
 	public void processInput(SerializableObject obj) {
 		StringBuilder builder = new StringBuilder();
@@ -33,7 +45,7 @@ public class XMLSerialization implements SerStrategy{
 					Object invokeRet = getterMethod.invoke(obj);
 					builder.append(ser.getDataTypeTag(field.getName(), "boolean", invokeRet.toString()));
 					builder.append(System.getProperty("line.separator"));
-				} else if ( int.class == field.getType()) {
+				} else if (int.class == field.getType()) {
 					Method getterMethod = cls.getMethod("get" + field.getName());
 					Object invokeRet = getterMethod.invoke(obj);
 					if (Integer.parseInt(invokeRet.toString()) >= 10) {
@@ -43,7 +55,7 @@ public class XMLSerialization implements SerStrategy{
 				} else if (long.class == field.getType()) {
 					Method getterMethod = cls.getMethod("get" + field.getName());
 					Object invokeRet = getterMethod.invoke(obj);
-					if (Long.parseLong(invokeRet.toString())>= 10) {
+					if (Long.parseLong(invokeRet.toString()) >= 10) {
 						builder.append(ser.getDataTypeTag(field.getName(), "long", invokeRet.toString()));
 						builder.append(System.getProperty("line.separator"));
 					}
@@ -67,13 +79,11 @@ public class XMLSerialization implements SerStrategy{
 				} else if (short.class == field.getType()) {
 					Method getterMethod = cls.getMethod("get" + field.getName());
 					Object invokeRet = getterMethod.invoke(obj);
-					if (Short.parseShort(invokeRet.toString()) >= 10) {
 					builder.append(ser.getDataTypeTag(field.getName(), "short", invokeRet.toString()));
 					builder.append(System.getProperty("line.separator"));
-					}
 				}
-			} catch (IllegalArgumentException |NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e) {
-				// TODO Auto-generated catch block
+			} catch (IllegalArgumentException | NoSuchMethodException | SecurityException | IllegalAccessException
+					| InvocationTargetException e) {
 				e.printStackTrace();
 			}
 		}
@@ -83,11 +93,14 @@ public class XMLSerialization implements SerStrategy{
 		builder.append(System.getProperty("line.separator"));
 		fileProcessor.writeToFile(builder.toString());
 	}
+	/**
+	 *This method is declared in serStrategy which is used during Deserialization
+	 *this method parses the given xml format and creates object out of it using reflection
+	 *@return null
+	 */
 	@Override
-	public SerializableObject processFile() {
-		// TODO Auto-generated method stub
+	public SerializableObject processInputDeser() {
 		return null;
 	}
-	
 
 }
