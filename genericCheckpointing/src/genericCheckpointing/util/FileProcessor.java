@@ -27,7 +27,7 @@ public class FileProcessor {
 
 	/**
 	 * This method is used to set the list and returns it
-	 * 
+	 * @param serReadObj serReadObj
 	 */
 	public void setSerReadObj(List<SerializableObject> serReadObj) {
 		this.serReadObj = serReadObj;
@@ -35,15 +35,14 @@ public class FileProcessor {
 
 	/**
 	 * This method is used to opens the provided file
-	 * 
-	 * @param FileName
+	 * @param fileName fileName
 	 * 
 	 */
-	public void openFile(String FileName) {
+	public void openFile(String fileName) {
 		try {
-			bufferedReader = new BufferedReader(new FileReader(FileName));
+			bufferedReader = new BufferedReader(new FileReader(fileName));
 		} catch (IOException e) {
-			System.out.println("File not found at location: " + FileName);
+			System.out.println("File not found at location: " + fileName);
 			System.exit(1);
 		}
 	}
@@ -70,6 +69,7 @@ public class FileProcessor {
 
 	/**
 	 * This method is used to write the content to the open file
+	 * @param str str
 	 * 
 	 */
 	public void writeToFile(String str) {
@@ -84,7 +84,7 @@ public class FileProcessor {
 
 	/**
 	 * This method is used to Read the content of the open file
-	 * 
+	 * @return line
 	 */
 	public String readLine() {
 		String line = null;
@@ -99,7 +99,7 @@ public class FileProcessor {
 
 	/**
 	 * This method is used to open the file to write the content
-	 * 
+	 * @param filename filename
 	 */
 	public void openFileToWrite(String filename) {
 

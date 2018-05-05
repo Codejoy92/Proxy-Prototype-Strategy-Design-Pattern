@@ -14,7 +14,7 @@ public class XMLDeserialization implements SerStrategy {
 	/**
 	 *This is a paramterized constructor which takes in FileProcessor object 
 	 *its used for reading the content of file line by line
-	 *@param fileProcessorIn
+	 *@param fileProcessorIn fileProcessorIn
 	 *
 	 */
 	public XMLDeserialization(FileProcessor fileProcessorIn) {
@@ -27,7 +27,7 @@ public class XMLDeserialization implements SerStrategy {
 	}
 	/**
 	 *This method is declared in serStrategy which is used during serialization
-	 *@param obj
+	 *@param obj obj
 	 */
 	@Override
 	public void processInput(SerializableObject obj) {

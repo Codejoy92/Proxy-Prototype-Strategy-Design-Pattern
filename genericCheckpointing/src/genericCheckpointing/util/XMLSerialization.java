@@ -12,7 +12,7 @@ public class XMLSerialization implements SerStrategy {
 	/**
 	 *This is a paramterized constructor which takes in FileProcessor object 
 	 *its used for reading the content of file line by line
-	 *@param fileProcessorIn
+	 *@param fileProcessorIn fileProcessorIn
 	 *
 	 */
 	public XMLSerialization(FileProcessor fileProcessorIn) {

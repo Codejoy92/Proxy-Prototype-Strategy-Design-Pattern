@@ -12,7 +12,12 @@ ant -buildfile src/build.xml all
 ant -buildfile src/build.xml run -Darg0=deser -Darg1=10 -Darg2=input.txt
 
 -----------------------------------------------------------------------
+## To create javadocs
+1. make sure you are inside src folder
+2. run following command "ant javadocs"
+3. Destination: inside genericCheckpointing
 
+-----------------------------------------------------------------------
 ## To create tarball for submission
 tar -cvf sujoy_das_assign_5.tar sujoy_das_assign_5/
 gzip sujoy_das_assign_5.tar

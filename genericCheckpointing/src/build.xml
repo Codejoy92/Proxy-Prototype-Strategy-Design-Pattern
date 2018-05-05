@@ -1,39 +1,39 @@
 <project name="genericCheckpointing" default="compile_all" basedir="..">
 
-  <property name="BUILD.compiler"       value="modern"/>
-  <property name="src"                  value="src"/>
-  <property name="BUILD"                value="src/BUILD"/>
-  <property name="classes"              value="${BUILD}/classes"/>
+	<property name="BUILD.compiler"       value="modern"/>
+	<property name="src"                  value="src"/>
+	<property name="BUILD"                value="src/BUILD"/>
+	<property name="classes"              value="${BUILD}/classes"/>
 
 
-  <target name="all" depends="compile_all"/>
+	<target name="all" depends="compile_all"/>
 
-  <target name="compile_all"
+	<target name="compile_all"
           depends="genericCheckpointing"/>
 
-  <target name="clean">
-       <delete dir="${BUILD}"/>
-  </target>
+	<target name="clean">
+		<delete dir="${BUILD}"/>
+	</target>
 
-  <!-- Prepare target directories -->
-  <target name="prepare">
-        <mkdir dir="${BUILD}"/>
-        <mkdir dir="${classes}"/>
-  </target>
-
-
- <target name="jar">
-        <mkdir dir="${BUILD}/jar"/>
-        <jar destfile="${BUILD}/jar/genericCheckpointing.jar" basedir="${BUILD}/classes">
-            <manifest>
-                <attribute name="Main-Class" value="genericCheckpointing.driver.Driver"/>
-            </manifest>
-        </jar>
-    </target>
+	<!-- Prepare target directories -->
+	<target name="prepare">
+		<mkdir dir="${BUILD}"/>
+		<mkdir dir="${classes}"/>
+	</target>
 
 
-  <target name="genericCheckpointing" depends="prepare">
-    <javac srcdir="${src}"
+	<target name="jar">
+		<mkdir dir="${BUILD}/jar"/>
+		<jar destfile="${BUILD}/jar/genericCheckpointing.jar" basedir="${BUILD}/classes">
+			<manifest>
+				<attribute name="Main-Class" value="genericCheckpointing.driver.Driver"/>
+			</manifest>
+		</jar>
+	</target>
+
+
+	<target name="genericCheckpointing" depends="prepare">
+		<javac srcdir="${src}"
            includes="genericCheckpointing/**"
            excludes="**/package.html"
            destdir="${classes}"
@@ -41,18 +41,21 @@
            debug="on"
            optimize="on"
            deprecation="off"/>
-  </target>
+	</target>
+	<target name="javadocs" depends="prepare">
+		<mkdir dir="javadocs"/>
+		<javadoc classpath="${classes}" destdir="javadocs" windowtitle="API" use="true" version="true" author="true" sourcepath="${src}" packagenames="genericCheckpointing.*"/>
+	</target>
 
-
-<target name="run" depends="jar">
-        <java jar="${BUILD}/jar/genericCheckpointing.jar"  fork="true">
+	<target name="run" depends="jar">
+		<java jar="${BUILD}/jar/genericCheckpointing.jar"  fork="true">
 			<arg value="${arg0}"/>
 			<arg value="${arg1}"/>
-	        <arg value="${arg2}"/>
-	        		
-        </java>
-	
-    </target>
+			<arg value="${arg2}"/>
+
+		</java>
+
+	</target>
 
 
 </project>
