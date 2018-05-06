@@ -17,6 +17,14 @@ public class DeserializeTypes {
 		matcher.find();
 		return line.substring(matcher.start(), matcher.end());
 	}
+	
+	public String parseUnknown(String line) {
+		Pattern pattern = Pattern.compile("\\\"(.*)\\\"");
+		Matcher matcher = pattern.matcher(line);
+		matcher.find();
+		return line.substring(matcher.start(), matcher.end());
+		
+	}
 	public float parseFloatType(String str) {
 		return Float.parseFloat(parseLine(str));
 	}

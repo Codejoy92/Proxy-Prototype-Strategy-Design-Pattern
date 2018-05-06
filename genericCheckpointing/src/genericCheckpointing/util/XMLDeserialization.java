@@ -43,6 +43,7 @@ public class XMLDeserialization implements SerStrategy {
 		deser = new DeserializeTypes();
 		SerializableObject object = null;
 		String line;
+		String[] splited = null;
 		line = fileProcessor.readLine();
 		Class<?> className = null;
 				while (line != null){
@@ -55,84 +56,90 @@ public class XMLDeserialization implements SerStrategy {
 						if (line.trim().equals("</complexType>")) {
 							System.out.println(object);
 							serReadObj.add(object);
-						} else if (line.contains("myString")) {
-							String value = deser.parseLine(line);
-							Class[] paramString = new Class[1];
-							paramString[0] = String.class;
-							Method method = className.getDeclaredMethod("setmyString", paramString);
-							method.invoke(object, value);
-						} else if (line.contains("myBool")) {
-							boolean value = deser.parseBoolType(line);
-							Class[] paramBool = new Class[1];
-							paramBool[0] = Boolean.TYPE;
-							Method method = className.getDeclaredMethod("setmyBool", paramBool);
-							method.invoke(object, value);
-						} else if (line.contains("complexType") && !line.trim().equals("</complexType>")) {
+						}else if (line.contains("complexType") && !line.trim().equals("</complexType>")) {
 							className = Class.forName(deser.parseComplexTag(line));
 							object = (SerializableObject) className.newInstance();
-						} else if (line.contains("myInt")) {
-							int intValue = deser.parseIntType(line);
-							Class[] paramInt = new Class[1];
-							paramInt[0] = Integer.TYPE;
-							Method method = className.getDeclaredMethod("setmyInt", paramInt);
-							method.invoke(object, intValue);
-						} else if (line.contains("myOtherInt")) {
-							int intValue = deser.parseIntType(line);
-							Class[] paramInt = new Class[1];
-							paramInt[0] = Integer.TYPE;
-							Method method = className.getDeclaredMethod("setmyOtherInt", paramInt);
-							method.invoke(object, intValue);
-						} else if (line.contains("myLong")) {
-							long value = deser.parseMyLong(line);
-							Class[] paramLong = new Class[1];
-							paramLong[0] = Long.TYPE;
-							Method method = className.getDeclaredMethod("setmyLong", paramLong);
-							method.invoke(object, value);
-						} else if (line.contains("myOtherLong")) {
-							long value = deser.parseMyLong(line);
-							Class[] paramLong = new Class[1];
-							paramLong[0] = Long.TYPE;
-							Method method = className.getDeclaredMethod("setmyOtherLong", paramLong);
-							method.invoke(object, value);
-						} else if (line.contains("myDouble")) {
-							double value = deser.parseDoubleType(line);
-							Class[] paramDouble = new Class[1];
-							paramDouble[0] = Double.TYPE;
-							Method method = className.getDeclaredMethod("setmyDouble", paramDouble);
-							method.invoke(object, value);
-						} else if (line.contains("myOtherDouble")) {
-							double value = deser.parseDoubleType(line);
-							Class[] paramDouble = new Class[1];
-							paramDouble[0] = Double.TYPE;
-							Method method = className.getDeclaredMethod("setmyOtherDouble", paramDouble);
-							method.invoke(object, value);
-						} else if (line.contains("myFloat")) {
-							float value = deser.parseFloatType(line);
-							Class[] paramFloat = new Class[1];
-							paramFloat[0] = Float.TYPE;
-							Method method = className.getDeclaredMethod("setmyFloat", paramFloat);
-							method.invoke(object, value);
-						}else if (line.contains("myShort")) {
-							short value = deser.parseShortType(line);
-							Class[] paramShort = new Class[1];
-							paramShort[0] = Short.TYPE;
-							Method method = className.getDeclaredMethod("setmyShort", paramShort);
-							method.invoke(object, value);
-						}else if (line.contains("myOtherShort")) {
-							short value = deser.parseShortType(line);
-							Class[] paramShort = new Class[1];
-							paramShort[0] = Short.TYPE;
-							Method method = className.getDeclaredMethod("setmyOtherShort", paramShort);
-							method.invoke(object, value);
+						}else if(line.contains("xsd")) {
+							String value = deser.parseUnknown(line);
+							if(value.contains("int")) {
+								int value1 = deser.parseIntType(line);
+								Class[] param = new Class[1];
+								param[0] = Integer.TYPE;
+								splited = line.split(" ");
+								Method method = className.getDeclaredMethod("set"+splited[0].substring(1), param);
+								method.invoke(object, value1);
+								splited = null;
+								
+							}
+							else if (value.contains("char")) {
+								String value1 = deser.parseLine(line);
+								Class[] param = new Class[1];
+								param[0] = char.class;
+								splited = line.split(" ");
+								Method method = className.getDeclaredMethod("set"+splited[0].substring(1), param);
+								method.invoke(object, value1.charAt(0));
+								splited = null;
+							}
+							else if (value.contains("short")) {
+								short value1 = deser.parseShortType(line);
+								Class[] param = new Class[1];
+								param[0] = short.class;
+								splited = line.split(" ");
+								Method method = className.getDeclaredMethod("set"+splited[0].substring(1), param);
+								method.invoke(object, value1);
+								splited = null;
+							}
+							else if (value.contains("long")) {
+								long value1 = deser.parseMyLong(line);
+								Class[] param = new Class[1];
+								param[0] = long.class;
+								splited = line.split(" ");
+								Method method = className.getDeclaredMethod("set"+splited[0].substring(1), param);
+								method.invoke(object, value1);
+								splited = null;
+							}
+							else if (value.contains("double")) {
+								double value1 = deser.parseDoubleType(line);
+								Class[] param = new Class[1];
+								param[0] = double.class;
+								splited = line.split(" ");
+								Method method = className.getDeclaredMethod("set"+splited[0].substring(1), param);
+								method.invoke(object, value1);
+								splited = null;
+							}
+							else if (value.contains("float")) {
+								float value1 = deser.parseFloatType(line);
+								Class[] param = new Class[1];
+								param[0] = float.class;
+								splited = line.split(" ");
+								Method method = className.getDeclaredMethod("set"+splited[0].substring(1), param);
+								method.invoke(object, value1);
+								splited = null;
+							}
+							else if (value.contains("boolean")) {
+								boolean value1 = deser.parseBoolType(line);
+								Class[] param = new Class[1];
+								param[0] = boolean.class;
+								splited = line.split(" ");
+								Method method = className.getDeclaredMethod("set"+splited[0].substring(1), param);
+								method.invoke(object, value1);
+								splited = null;
+							}
+							else if (value.contains("string")) {
+								String value1 = deser.parseLine(line);
+								Class[] param = new Class[1];
+								param[0] = String.class;
+								splited = line.split(" ");
+								Method method = className.getDeclaredMethod("set"+splited[0].substring(1), param);
+								method.invoke(object, value1);
+								splited = null;
+							}
+							
 						}
-						else if (line.contains("myChar")) {
-							String value = deser.parseLine(line);
-							Class[] paramChar = new Class[1];
-							paramChar[0] = char.class;
-							Method method = className.getDeclaredMethod("setmyChar", paramChar);
-							method.invoke(object, value.charAt(0));
-						}
-					} catch (NoSuchMethodException | IllegalAccessException | SecurityException
+					}catch(NoSuchMethodException e){
+						System.err.println("no setter with name " + "set"+splited[0].substring(1) + " found" );
+					}
+					catch (IllegalAccessException | SecurityException
 							| IllegalArgumentException | ClassNotFoundException | InvocationTargetException
 							| InstantiationException e) {
 						e.printStackTrace();
