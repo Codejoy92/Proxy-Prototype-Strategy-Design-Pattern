@@ -1,3 +1,4 @@
+This assignment's submission is my own work and I did not discuss with any other past or current student, nor did I have access to a previous submission of this assignment by another student.
 Assuming you are in the directory containing this README:
 
 ## To clean:
@@ -51,3 +52,5 @@ if one of the value is less than 10 with respect to long, int, double
 output gives mismatch for that respective object.
 
 3.if defined data type is not found then program prints that respective setter method is not available but it deserialize other data types and provides with default values for data types which are not present in the checkpoint file.
+
+4.in deser mode argument 2 which is no of objects shouldn't be considered and whole file should be parsed.
