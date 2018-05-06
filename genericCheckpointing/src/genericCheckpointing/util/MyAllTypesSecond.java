@@ -10,7 +10,11 @@ public class MyAllTypesSecond extends SerializableObject {
 	private char myChar;
 	
 	public MyAllTypesSecond(){
-
+		myDouble = 0.0;
+		myOtherDouble = 0.0;
+		myFloat = 0;
+		myShort = 0;
+		myChar = ' ';
 	}
 	
 	public MyAllTypesSecond(double myDoubleIn, double myOtherDoubleIn, float myFloatIn, short myShortIn, short myOtherShortIn, char myCharIn) {

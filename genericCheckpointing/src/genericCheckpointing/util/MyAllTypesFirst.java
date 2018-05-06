@@ -10,6 +10,12 @@ public class MyAllTypesFirst extends SerializableObject{
 	
 	
 	public MyAllTypesFirst() {
+		myInt = 0;
+		myOtherInt = 0;
+		myLong = 0L;
+		myOtherLong = 0L;
+		myString = "";
+		myBool = false;
 	}
 	
 	public MyAllTypesFirst(int myIntIn, int myOtherIntIn, long myLongIn, long myOtherLongIn, String myStringIn, boolean myBoolIn) {
