@@ -39,4 +39,15 @@ offense."
 Note:
 github id : Codejoy92
 
-For simplicity of grading, generated random value only once per object and assigned it to all data types so that mismatch count can be traced easily.
+As per class discussion and email clarification following are the points to be considered.
+
+1.input file should be provided by command line argument
+2.sample input file is not provided in the submission
+
+3.For simplicity of grading, generated random value only once per object and assigned it to all data types so that mismatch count can be traced easily.
+Although I have also tested the code with different values for different data types.
+for example
+if one of the value is less than 10 with respect to long, int, double
+output gives mismatch for that respective object.
+
+3.if defined data type is not found then program prints that respective setter method is not available but it deserialize other data types and provides with default values for data types which are not present in the checkpoint file.
