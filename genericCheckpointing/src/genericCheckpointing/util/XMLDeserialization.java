@@ -65,7 +65,7 @@ public class XMLDeserialization implements SerStrategy {
 								int value1 = deser.parseIntType(line);
 								Class[] param = new Class[1];
 								param[0] = Integer.TYPE;
-								splited = line.split(" ");
+								splited = line.trim().split(" ");
 								Method method = className.getDeclaredMethod("set"+splited[0].substring(1), param);
 								method.invoke(object, value1);
 								splited = null;
@@ -75,7 +75,7 @@ public class XMLDeserialization implements SerStrategy {
 								String value1 = deser.parseLine(line);
 								Class[] param = new Class[1];
 								param[0] = char.class;
-								splited = line.split(" ");
+								splited = line.trim().split(" ");
 								Method method = className.getDeclaredMethod("set"+splited[0].substring(1), param);
 								method.invoke(object, value1.charAt(0));
 								splited = null;
@@ -84,7 +84,7 @@ public class XMLDeserialization implements SerStrategy {
 								short value1 = deser.parseShortType(line);
 								Class[] param = new Class[1];
 								param[0] = short.class;
-								splited = line.split(" ");
+								splited = line.trim().split(" ");
 								Method method = className.getDeclaredMethod("set"+splited[0].substring(1), param);
 								method.invoke(object, value1);
 								splited = null;
@@ -93,7 +93,7 @@ public class XMLDeserialization implements SerStrategy {
 								long value1 = deser.parseMyLong(line);
 								Class[] param = new Class[1];
 								param[0] = long.class;
-								splited = line.split(" ");
+								splited = line.trim().split(" ");
 								Method method = className.getDeclaredMethod("set"+splited[0].substring(1), param);
 								method.invoke(object, value1);
 								splited = null;
@@ -102,7 +102,7 @@ public class XMLDeserialization implements SerStrategy {
 								double value1 = deser.parseDoubleType(line);
 								Class[] param = new Class[1];
 								param[0] = double.class;
-								splited = line.split(" ");
+								splited = line.trim().split(" ");
 								Method method = className.getDeclaredMethod("set"+splited[0].substring(1), param);
 								method.invoke(object, value1);
 								splited = null;
@@ -111,7 +111,7 @@ public class XMLDeserialization implements SerStrategy {
 								float value1 = deser.parseFloatType(line);
 								Class[] param = new Class[1];
 								param[0] = float.class;
-								splited = line.split(" ");
+								splited = line.trim().split(" ");
 								Method method = className.getDeclaredMethod("set"+splited[0].substring(1), param);
 								method.invoke(object, value1);
 								splited = null;
@@ -120,7 +120,7 @@ public class XMLDeserialization implements SerStrategy {
 								boolean value1 = deser.parseBoolType(line);
 								Class[] param = new Class[1];
 								param[0] = boolean.class;
-								splited = line.split(" ");
+								splited = line.trim().split(" ");
 								Method method = className.getDeclaredMethod("set"+splited[0].substring(1), param);
 								method.invoke(object, value1);
 								splited = null;
@@ -129,7 +129,7 @@ public class XMLDeserialization implements SerStrategy {
 								String value1 = deser.parseLine(line);
 								Class[] param = new Class[1];
 								param[0] = String.class;
-								splited = line.split(" ");
+								splited = line.trim().split(" ");
 								Method method = className.getDeclaredMethod("set"+splited[0].substring(1), param);
 								method.invoke(object, value1);
 								splited = null;

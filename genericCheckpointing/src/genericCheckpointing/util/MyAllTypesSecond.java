@@ -2,87 +2,88 @@ package genericCheckpointing.util;
 
 public class MyAllTypesSecond extends SerializableObject {
 
-	private double myDouble;
-	private double myOtherDouble;
-	private float myFloat;
-	private short myShort;
-	private short myOtherShort;
-	private char myChar;
+	private double myDoubleT;
+	private double myOtherDoubleT;
+	private float myFloatT;
+	private short myShortT;
+	private short myOtherShortT;
+	private char myCharT;
 	
 	public MyAllTypesSecond(){
-		myDouble = 0.0;
-		myOtherDouble = 0.0;
-		myFloat = 0;
-		myShort = 0;
-		myChar = ' ';
+		myDoubleT = 0.0;
+		myOtherDoubleT = 0.0;
+		myFloatT = 0;
+		myShortT = 0;
+		myCharT = ' ';
 	}
 	
 	public MyAllTypesSecond(double myDoubleIn, double myOtherDoubleIn, float myFloatIn, short myShortIn, short myOtherShortIn, char myCharIn) {
-		myDouble = myDoubleIn;
-		myOtherDouble = myOtherDoubleIn;
-		myFloat = myFloatIn;
-		myShort = myShortIn;
-		myOtherShort = myOtherShortIn;
-		myChar = myCharIn;
+		myDoubleT = myDoubleIn;
+		myOtherDoubleT = myOtherDoubleIn;
+		myFloatT = myFloatIn;
+		myShortT = myShortIn;
+		myOtherShortT = myOtherShortIn;
+		myCharT = myCharIn;
 	}
 
-	public double getmyDouble() {
-		return myDouble;
+	
+	public double getmyDoubleT() {
+		return myDoubleT;
 	}
 
-	public void setmyDouble(double myDouble) {
-		this.myDouble = myDouble;
+	public void setmyDoubleT(double myDoubleT) {
+		this.myDoubleT = myDoubleT;
 	}
 
-	public double getmyOtherDouble() {
-		return myOtherDouble;
+	public double getmyOtherDoubleT() {
+		return myOtherDoubleT;
 	}
 
-	public void setmyOtherDouble(double myOtherDouble) {
-		this.myOtherDouble = myOtherDouble;
+	public void setmyOtherDoubleT(double myOtherDoubleT) {
+		this.myOtherDoubleT = myOtherDoubleT;
 	}
 
-	public float getmyFloat() {
-		return myFloat;
+	public float getmyFloatT() {
+		return myFloatT;
 	}
 
-	public void setmyFloat(float myFloat) {
-		this.myFloat = myFloat;
+	public void setmyFloatT(float myFloatT) {
+		this.myFloatT = myFloatT;
 	}
 
-	public short getmyShort() {
-		return myShort;
+	public short getmyShortT() {
+		return myShortT;
 	}
 
-	public void setmyShort(short myShort) {
-		this.myShort = myShort;
+	public void setmyShortT(short myShortT) {
+		this.myShortT = myShortT;
 	}
 
-	public short getmyOtherShort() {
-		return myOtherShort;
+	public short getmyOtherShortT() {
+		return myOtherShortT;
 	}
 
-	public void setmyOtherShort(short myOtherShort) {
-		this.myOtherShort = myOtherShort;
+	public void setmyOtherShortT(short myOtherShortT) {
+		this.myOtherShortT = myOtherShortT;
 	}
 
-	public char getmyChar() {
-		return myChar;
+	public char getmyCharT() {
+		return myCharT;
 	}
 
-	public void setmyChar(char myChar) {
-		this.myChar = myChar;
+	public void setmyCharT(char myCharT) {
+		this.myCharT = myCharT;
 	}
 
 	@Override
 	public int hashCode() {
 		int result = 1;
-		result += Double.hashCode(myDouble);
-		result += Double.hashCode(myOtherDouble);
-		result += Float.hashCode(myFloat); 
-		result += myShort;
-		result += myOtherShort;
-		result += Character.hashCode(myChar);
+		result += Double.hashCode(myDoubleT);
+		result += Double.hashCode(myOtherDoubleT);
+		result += Float.hashCode(myFloatT); 
+		result += myShortT;
+		result += myOtherShortT;
+		result += Character.hashCode(myCharT);
 		return result;
 	}
 
@@ -95,25 +96,25 @@ public class MyAllTypesSecond extends SerializableObject {
 		if (getClass() != obj.getClass())
 			return false;
 		MyAllTypesSecond other = (MyAllTypesSecond) obj;
-		if (myChar != other.myChar)
+		if (myCharT != other.myCharT)
 			return false;
-		if (Double.doubleToLongBits(myDouble) != Double.doubleToLongBits(other.myDouble))
+		if (Double.doubleToLongBits(myDoubleT) != Double.doubleToLongBits(other.myDoubleT))
 			return false;
-		if (Float.floatToIntBits(myFloat) != Float.floatToIntBits(other.myFloat))
+		if (Float.floatToIntBits(myFloatT) != Float.floatToIntBits(other.myFloatT))
 			return false;
-		if (Double.doubleToLongBits(myOtherDouble) != Double.doubleToLongBits(other.myOtherDouble))
+		if (Double.doubleToLongBits(myOtherDoubleT) != Double.doubleToLongBits(other.myOtherDoubleT))
 			return false;
-		if (myOtherShort != other.myOtherShort)
+		if (myOtherShortT != other.myOtherShortT)
 			return false;
-		if (myShort != other.myShort)
+		if (myShortT != other.myShortT)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "MyAllTypesSecond [myDouble=" + myDouble + ", myOtherDouble=" + myOtherDouble + ", myFloat=" + myFloat
-				+ ", myShort=" + myShort + ", myOtherShort=" + myOtherShort + ", myChar=" + myChar + "]";
+		return "MyAllTypesSecond [myDouble=" + myDoubleT + ", myOtherDouble=" + myOtherDoubleT + ", myFloat=" + myFloatT
+				+ ", myShort=" + myShortT + ", myOtherShort=" + myOtherShortT + ", myChar=" + myCharT + "]";
 	}
 	
 	
