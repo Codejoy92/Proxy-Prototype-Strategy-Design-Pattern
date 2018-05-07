@@ -54,3 +54,4 @@ output gives mismatch for that respective object.
 3.if defined data type is not found then program prints that respective setter method is not available but it deserialize other data types and provides with default values for data types which are not present in the checkpoint file.
 
 4.in deser mode argument 2 which is no of objects shouldn't be considered and whole file should be parsed.
+5.if argument 2 is anything other than int program ends

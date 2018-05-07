@@ -18,6 +18,7 @@ import genericCheckpointing.xmlStoreRestore.StoreRestoreHandler;
 public class Driver {
 
 	public static void main(String[] args) {
+		int noOfObjects = 0;
 		Random rand = new Random();
 		Utility util = new Utility();
 		ProxyCreator proxy = new ProxyCreator();
@@ -33,7 +34,12 @@ public class Driver {
 		String mode = args[0];
 		String filename = args[2];
 		processor.openFile(filename);
-		int noOfObjects = Integer.parseInt(args[1]);
+		try {
+			noOfObjects = Integer.parseInt(args[1]);
+		}catch(NumberFormatException e){
+			System.out.println("No of Object should be an integer");
+			System.exit(1);
+		}
 		// The mode could be "serdeser" or "deser"
 		// processing serialization and deserialization
 		if (mode.equals("deser")) {
